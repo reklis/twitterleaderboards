@@ -2,9 +2,9 @@
 
 /**
  * @ngdoc function
- * @name twitterleaderboardApp.controller:LeaderboarddetailCtrl
+ * @name twitterleaderboardApp.controller:LeaderboardDetailCtrl
  * @description
- * # LeaderboarddetailCtrl
+ * # LeaderboardDetailCtrl
  * Controller of the twitterleaderboardApp
  */
 angular.module('twitterleaderboardApp')
