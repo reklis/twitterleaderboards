@@ -8,7 +8,7 @@
  * Controller of the twitterleaderboardApp
  */
 angular.module('twitterleaderboardApp')
-  .controller('LeaderboardDetailCtrl', function ($scope, $routeParams, $location, leaderboard) {
+  .controller('LeaderboardDetailCtrl', function ($scope, $routeParams, $location, $timeout, leaderboard) {
 
     $scope.loading = true;
     $scope.lbid = $routeParams.lbid;

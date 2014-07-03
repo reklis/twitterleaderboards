@@ -34,10 +34,10 @@ angular.module('twitterleaderboardApp')
 
     $scope.parseRawName = function () {
       $scope.newlb.name = $scope.newlb.rawname;
-    }
+    };
 
     $scope.parseRawKeywords = function () {
-      $scope.newlb.topics = $scope.newlb.rawkeywords.split(/\s*,\s*/)
+      $scope.newlb.topics = $scope.newlb.rawkeywords.split(/\s*,\s*/);
     };
 
     $scope.formValid = function () {
