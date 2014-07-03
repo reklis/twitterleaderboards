@@ -1,0 +1,23 @@
+$icon-font-path: "../bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/";
+
+// bower:scss
+@import "bootstrap-sass-official/vendor/assets/stylesheets/bootstrap.scss";
+// endbower
+
+.site-name {
+
+  .name-left {
+    color: gray;
+  }
+
+  .name-right {
+    color: gray;
+  }
+
+}
+
+.newlb-topics {
+  .label {
+    margin-left: 1em;
+  }
+}

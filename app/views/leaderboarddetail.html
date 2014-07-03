@@ -1,0 +1,83 @@
+<h4 ng-show="loading">Loading...</h4>
+
+<div ng-hide="loading">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3>{{ lbdetails.lb.name }}</h3>
+
+      <h4 class="text-muted">{{ lbdetails.lb.topics }}</h4>
+    </div>
+    <div class="panel-body">
+
+      <ul class="nav nav-tabs" role="tablist">
+        <li ng-class="{active: 'lasthour' == activetab }">
+          <a href ng-click="activetab = 'lasthour'">Last Hour</a>
+        </li>
+        <li ng-class="{active: 'lastday' == activetab }">
+          <a href ng-click="activetab = 'lastday'">Last Day</a>
+        </li>
+      </ul>
+
+      <div class="tab-content">
+        <div class="tab-pane" ng-class="{active: 'lasthour' == activetab }">
+
+          <h5 class="text-center" ng-hide="lbdetails.rankings.3600000.length">
+            ugg, don't you just hate waiting for things to be ranked?
+          </h5>
+
+          <div class="list-group">
+            <li class="list-group-item" ng-repeat="item in lbdetails.rankings.3600000">
+              <span class="badge">{{ item.sharecount }}</span>
+              <a target="_new" href="{{ item._id }}">{{ item._id }}</a>
+            </li>
+          </div>
+        </div>
+        <div class="tab-pane" ng-class="{active: 'lastday' == activetab }">
+
+          <h5 class="text-center" ng-hide="lbdetails.rankings.3600000.length">
+            ugg, don't you just hate waiting for things to be ranked?
+          </h5>
+
+          <div class="list-group">
+            <li class="list-group-item" ng-repeat="item in lbdetails.rankings.86400000">
+              <span class="badge">{{ item.sharecount }}</span>
+              <a target="_new" href="{{ item._id }}">{{ item._id }}</a>
+            </li>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="panel-footer">
+      <button class="btn btn-danger" ng-click="confirmDeleteLb()">
+        <span class="glyphicon glyphicon-trash"></span> Delete this Linkboard
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<div id="confirm-delete-modal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" >
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title">Delete Linkboard</h4>
+      </div>
+      <div class="modal-body">
+        If you throw this away, you'll need to make one again.  Which is totally easy anyway.
+      </div>
+      <div class="modal-footer">
+        <div ng-hide="deletingLb">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Whoops, Nevermind</button>
+          <button type="button" class="btn btn-danger" ng-click="deleteLb()">
+            <span class="glyphicon glyphicon-trash"></span> Trash it Already
+          </button>
+        </div>
+        <div ng-show="deletingLb">
+          <p class="text-muted">give it to me i throw it away...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
