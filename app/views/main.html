@@ -17,10 +17,13 @@
 </div>
 
 <div ng-show="user">
-  <h3>hey {{ user.oauth.profile.displayName }}</h3>
 
   <div class="panel panel-default">
-    <div class="panel-heading">Linkboards</div>
+    <div class="panel-heading">
+      {{ user.oauth.profile.displayName }} (<a target="_new" ng-href="http://twitter.com/{{ user.oauth.profile.name }}">@{{ user.oauth.profile.username }}</a>)
+
+      <a class="pull-right" href="{{ twitterLogoutUrl }}">Logout</a>
+    </div>
     <div class="panel-body">
 
       <p ng-hide="user.leaderboards.length" class="text-center">rather sparse here... looks like you don't have any linkboards yet</p>
@@ -64,16 +67,16 @@
               <input type="text" class="form-control" id="input-lbname"
                 ng-model="newlb.rawname"
                 ng-change="parseRawName()"
-                placeholder="super cool name for your linkboard">
+                placeholder="hacker stuff">
             </div>
           </div>
           <div class="form-group">
-            <label for="input-lbkeywords" class="col-sm-2 control-label">Keywords:</label>
+            <label for="input-lbkeywords" class="col-sm-2 control-label">Domains:</label>
             <div class="col-sm-10">
               <input type="text" class="form-control" id="input-lbkeywords"
                 ng-model="newlb.rawkeywords"
                 ng-change="parseRawKeywords()"
-                placeholder="comma, separated, list, of, keywords">
+                placeholder="github.com, github.io, news.ycombinator.com">
 
               <p class="pull-right newlb-topics">
                 <span class="label label-default" ng-repeat="t in newlb.topics">{{ t }}</span>
@@ -88,7 +91,7 @@
           <button href class="btn btn-success"
             ng-class="{disabled: !formValid()}"
             ng-click="createLb()">
-            <span class="glyphicon glyphicon-flash"></span> Make It So!
+            <span class="glyphicon glyphicon-ok"></span> Make It So!
           </button>
         </div>
         <div ng-show="creatingLb">

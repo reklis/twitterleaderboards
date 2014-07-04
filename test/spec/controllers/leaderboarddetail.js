@@ -3,7 +3,7 @@
 describe('Controller: LeaderboarddetailCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('twitterleaderboardApp'));
+  beforeEach(module('LinkboardApp'));
 
   var LeaderboarddetailCtrl,
     scope;

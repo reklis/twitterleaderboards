@@ -11,7 +11,6 @@
   "newcap": true,
   "noarg": true,
   "node": true,
-  "quotmark": "single",
   "regexp": true,
   "smarttabs": true,
   "strict": true,
@@ -20,6 +19,7 @@
   "unused": true,
   "globals": {
     "angular": false,
-    "$": false
+    "$": false,
+    "_": false
   }
 }

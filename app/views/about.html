@@ -1,2 +1,14 @@
-<h4>made in a hurry by <a target="_blank" href="http://www.twitter.com/{{ contactInfo.twitterhandle }}">@{{ contactInfo.twitterhandle }}</a></h4>
+<h1>How it Works</h1>
 
+<div class="row" ng-repeat="step in steps">
+  <div class="col-sm-2">
+    <h1 class="text-center"><i class="glyphicon glyphicon-{{ step.icon }}"></i></h1>
+  </div>
+  <div class="col-sm-8">
+    <h2 class="lead">{{ step.text }}</h2>
+  </div>
+</div>
+
+<hr>
+
+<h4 class="text-muted">made in a hurry by <a target="_blank" href="http://www.twitter.com/{{ contactInfo.twitterhandle }}">@{{ contactInfo.twitterhandle }}</a></h4>

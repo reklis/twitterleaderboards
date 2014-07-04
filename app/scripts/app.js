@@ -2,14 +2,15 @@
 
 /**
  * @ngdoc overview
- * @name twitterleaderboardApp
+ * @name LinkboardApp
  * @description
- * # twitterleaderboardApp
+ * # LinkboardApp
  *
  * Main module of the application.
  */
 angular
-  .module('twitterleaderboardApp', [
+  .module('LinkboardApp', [
+    'LinkboardApp.config',
     'ngAnimate',
     'ngCookies',
     'ngResource',

@@ -1,5 +1,4 @@
-// Generated on 2014-07-02 using generator-angular 0.9.2
-'use strict';
+/*global require, module */
 
 // # Globbing
 // for performance reasons we're only matching one level down:
@@ -8,6 +7,8 @@
 // 'test/spec/**/*.js'
 
 module.exports = function (grunt) {
+  'use strict';
+
 
   // Load grunt tasks automatically
   require('load-grunt-tasks')(grunt);
@@ -18,7 +19,7 @@ module.exports = function (grunt) {
   // Configurable paths for the application
   var appConfig = {
     app: require('./bower.json').appPath || 'app',
-    dist: 'dist'
+    dist: 'dist',
   };
 
   // Define the configuration for all the tasks
@@ -26,6 +27,28 @@ module.exports = function (grunt) {
 
     // Project settings
     yeoman: appConfig,
+
+    // Angular settings
+    ngconstant: {
+      options: {
+        name: 'LinkboardApp.config',
+        wrap: '"use strict";\n\n{%= __ngModule %}',
+        dest: '<%= yeoman.app %>/scripts/config.js',
+        space: '  '
+      },
+      development: {
+        constants: {
+          environment: 'development',
+          apiroot: 'http://localhost:5000'
+        }
+      },
+      production: {
+        constants: {
+          environment: 'production',
+          apiroot: 'http://polar-eyrie-5877.herokuapp.com'
+        }
+      }
+    },
 
     // Watches files for changes and runs tasks based on the changed files
     watch: {
@@ -399,6 +422,7 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
+      'ngconstant:development',
       'wiredep',
       'concurrent:server',
       'autoprefixer',
@@ -422,6 +446,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
+    'ngconstant:production',
     'wiredep',
     'useminPrepare',
     'concurrent:dist',

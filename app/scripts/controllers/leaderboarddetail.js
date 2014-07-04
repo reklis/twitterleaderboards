@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name twitterleaderboardApp.controller:LeaderboardDetailCtrl
+ * @name LinkboardApp.controller:LeaderboardDetailCtrl
  * @description
  * # LeaderboardDetailCtrl
- * Controller of the twitterleaderboardApp
+ * Controller of the LinkboardApp
  */
-angular.module('twitterleaderboardApp')
+angular.module('LinkboardApp')
   .controller('LeaderboardDetailCtrl', function ($scope, $routeParams, $location, $timeout, leaderboard) {
 
     $scope.loading = true;

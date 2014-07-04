@@ -3,7 +3,7 @@
 describe('Service: leaderboard', function () {
 
   // load the service's module
-  beforeEach(module('twitterleaderboardApp'));
+  beforeEach(module('LinkboardApp'));
 
   // instantiate service
   var leaderboard;

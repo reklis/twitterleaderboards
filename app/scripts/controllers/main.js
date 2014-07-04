@@ -2,22 +2,24 @@
 
 /**
  * @ngdoc function
- * @name twitterleaderboardApp.controller:MainCtrl
+ * @name LinkboardApp.controller:MainCtrl
  * @description
  * # MainCtrl
- * Controller of the twitterleaderboardApp
+ * Controller of the LinkboardApp
  */
-angular.module('twitterleaderboardApp')
-.controller('MainCtrl', function ($scope, apiconfig, leaderboard) {
+angular.module('LinkboardApp')
+.controller('MainCtrl', function ($scope, apiroot, leaderboard) {
     $scope.maxlbs = 4;
     $scope.loading = true;
-    $scope.twitterLoginUrl = apiconfig.rooturl + apiconfig.twitterlogin;
+
+    $scope.twitterLoginUrl = apiroot + '/auth/twitter';
+    $scope.twitterLogoutUrl = apiroot + '/logout';
 
     $scope.fetchUser = function () {
       $scope.auth = leaderboard.user(function () {
         if ($scope.auth && $scope.auth.user) {
           $scope.user = $scope.auth.user;
-          console.log($scope.user);
+          // console.log($scope.user);
         } else {
           $scope.notloggedin = true;
         }
@@ -37,7 +39,13 @@ angular.module('twitterleaderboardApp')
     };
 
     $scope.parseRawKeywords = function () {
-      $scope.newlb.topics = $scope.newlb.rawkeywords.split(/\s*,\s*/);
+      $scope.newlb.topics = _.chain($scope.newlb.rawkeywords.split(/[\s,\,]/))
+        .compact()
+        .uniq()
+        .filter(function (t) {
+          return (_.contains(t, '.'));
+        })
+        .value();
     };
 
     $scope.formValid = function () {
