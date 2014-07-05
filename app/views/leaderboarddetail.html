@@ -58,6 +58,10 @@
         <span class="glyphicon glyphicon-send"></span> Share
       </button>
 
+      <button ng-show="publish_url" class="btn btn-warning" ng-click="confirmUnShareLb()">
+        <span class="glyphicon glyphicon-ban-circle"></span> Stop Sharing
+      </button>
+
       <button class="btn btn-danger" ng-click="confirmDeleteLb()">
         <span class="glyphicon glyphicon-trash"></span> Delete
       </button>
@@ -74,8 +78,6 @@
       </div>
       <div class="modal-body">
         <p>This thing is pretty cool, let's send it to somebody</p>
-
-        <p>share url: <strong>{{ publish_url }}</strong></p>
       </div>
       <div class="modal-footer">
         <div ng-hide="sharingLb">
@@ -85,7 +87,34 @@
           </button>
         </div>
         <div ng-show="sharingLb">
-          <p class="text-muted">for great justice...</p>
+          <p class="text-muted"><kbd>(∩｀-´)⊃━☆ﾟ.*･｡ﾟ</kbd></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="confirm-unshare-modal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title">Stop Sharing Linkboard?</h4>
+      </div>
+      <div class="modal-body">
+        <p>Sharing is overrated, I just want to keep it all to myself.</p>
+
+        <p>share url: <strong>{{ publish_url }}</strong></p>
+      </div>
+      <div class="modal-footer">
+        <div ng-hide="unsharingLb">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Sorry, Wrong Button</button>
+          <button type="button" class="btn btn-warning" ng-click="unshareLb()">
+            <span class="glyphicon glyphicon-ban-circle"></span> Stop Sharing!!
+          </button>
+        </div>
+        <div ng-show="unsharingLb">
+          <p class="text-muted"><kbd>(╯︵╰,)</kbd></p>
         </div>
       </div>
     </div>
@@ -110,7 +139,7 @@
           </button>
         </div>
         <div ng-show="deletingLb">
-          <p class="text-muted">give it to me i throw it away...</p>
+          <p class="text-muted"><kbd>(╯°□°）╯︵ ┻━┻</kbd></p>
         </div>
       </div>
     </div>

@@ -14,6 +14,7 @@ angular.module('LinkboardApp')
 
     $scope.loading = true;
     $scope.sharingLb = false;
+    $scope.unsharingLb = false;
     $scope.deletingLb = false;
 
     $scope.lbid = $routeParams.lbid;
@@ -25,12 +26,7 @@ angular.module('LinkboardApp')
         $scope.loading = false;
 
         $scope.activetab = 'lasthour';
-
-        if ($scope.lbdetails.lb
-          && $scope.lbdetails.lb.publish_key
-        ) {
-          $scope.updatePublishUrl($scope.lbdetails.lb.publish_key);
-        }
+        $scope.updatePublishUrl($scope.lbdetails.lb.publish_key);
       }
     );
 
@@ -40,17 +36,12 @@ angular.module('LinkboardApp')
     });
 
     $scope.updatePublishUrl = function (publish_key) {
-      var s, u = window.location;
+      var u = window.location;
 
-      if (publish_key) {
-        s = u.protocol + '//' + u.host + '/#/pub/' + publish_key;
-      } else if ($scope.sharingLb) {
-        s ='publishing...';
-      } else {
-        s = 'unpublished';
-      }
-
-      $scope.publish_url = s;
+      $scope.publish_url = (publish_key)
+        ? u.protocol + '//' + u.host + '/#/pub/' + publish_key
+        : null
+      ;
     };
 
     $scope.confirmDeleteLb = function () {
@@ -90,6 +81,26 @@ angular.module('LinkboardApp')
           // console.log(publish_result);
           $scope.updatePublishUrl(publish_result.publish_key);
           $scope.sharingLb = false;
+          $('#confirm-share-modal').modal('hide');
+        }
+      );
+    };
+
+    $scope.confirmUnShareLb = function () {
+      $('#confirm-unshare-modal').modal('show');
+    };
+
+    $scope.unshareLb = function () {
+      $scope.unsharingLb = true;
+
+      leaderboard.unpublish(
+        null,
+        { id: $scope.lbid },
+        function () {
+          // console.log(publish_result);
+          $scope.updatePublishUrl();
+          $scope.unsharingLb = false;
+          $('#confirm-unshare-modal').modal('hide');
         }
       );
     };
