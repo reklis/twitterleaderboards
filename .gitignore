@@ -5,3 +5,4 @@ dist
 bower_components
 .s3cfg
 .s3credentials.csv
+app/scripts/config.js
