@@ -4,6 +4,12 @@
   <div class="panel panel-default">
     <div class="panel-heading">
       <h4>{{ lbdetails.lb.name }}</h4>
+
+      <p ng-show="publish_url">
+        <i class="glyphicon glyphicon-cloud"></i>
+        share url: <a ng-href="{{ publish_url }}">{{ publish_url }}</a>
+      </p>
+
       <p class="text-muted">{{ lbdetails.lb.topics }}</p>
     </div>
     <div class="panel-body">
@@ -48,23 +54,53 @@
 
     </div>
     <div class="panel-footer">
+      <button ng-hide="publish_url" class="btn btn-success" ng-click="confirmShareLb()">
+        <span class="glyphicon glyphicon-send"></span> Share
+      </button>
+
       <button class="btn btn-danger" ng-click="confirmDeleteLb()">
-        <span class="glyphicon glyphicon-trash"></span> Delete this Linkboard
+        <span class="glyphicon glyphicon-trash"></span> Delete
       </button>
     </div>
   </div>
 </div>
 
+<div id="confirm-share-modal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title">Share Linkboard</h4>
+      </div>
+      <div class="modal-body">
+        <p>This thing is pretty cool, let's send it to somebody</p>
 
-<div id="confirm-delete-modal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" >
-  <div class="modal-dialog modal-lg">
+        <p>share url: <strong>{{ publish_url }}</strong></p>
+      </div>
+      <div class="modal-footer">
+        <div ng-hide="sharingLb">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Uhh, Maybe later</button>
+          <button type="button" class="btn btn-success" ng-click="shareLb()">
+            <span class="glyphicon glyphicon-send"></span> Why are you always preparing? Publish!
+          </button>
+        </div>
+        <div ng-show="sharingLb">
+          <p class="text-muted">for great justice...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="confirm-delete-modal" class="modal fade" tabindex="-1" role="dialog" >
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         <h4 class="modal-title">Delete Linkboard</h4>
       </div>
       <div class="modal-body">
-        If you throw this away, you'll need to make one again.  Which is totally easy anyway.
+        <p>If you throw this away, you'll need to make one again.  Which is totally easy anyway.</p>
       </div>
       <div class="modal-footer">
         <div ng-hide="deletingLb">

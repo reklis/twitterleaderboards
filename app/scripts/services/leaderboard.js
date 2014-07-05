@@ -36,9 +36,19 @@ angular.module('LinkboardApp')
           topics: '@topics'
         }
       },
-      restart: {
+      publish: {
         method: 'JSONP',
-        url: apiroot + '/restart/stream?callback=JSON_CALLBACK',
+        url: apiroot + '/lb/:leaderboard_id/publish?callback=JSON_CALLBACK',
+        params: {
+          leaderboard_id: '@id'
+        }
+      },
+      unpublish: {
+        method: 'JSONP',
+        url: apiroot + '/lb/:leaderboard_id/unpublish?callback=JSON_CALLBACK',
+        params: {
+          leaderboard_id: '@id'
+        }
       }
     });
   });

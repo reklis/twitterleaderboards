@@ -42,9 +42,9 @@ angular.module('LinkboardApp')
       $scope.newlb.topics = _.chain($scope.newlb.rawkeywords.split(/[\s,\,]/))
         .compact()
         .uniq()
-        .filter(function (t) {
-          return (_.contains(t, '.'));
-        })
+        // .filter(function (t) {
+        //   return (_.contains(t, '.'));
+        // })
         .value();
     };
 
