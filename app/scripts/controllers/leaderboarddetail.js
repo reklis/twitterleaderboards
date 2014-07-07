@@ -1,4 +1,4 @@
-/*global URI, console, window */
+/*global console, window */
 
 'use strict';
 
