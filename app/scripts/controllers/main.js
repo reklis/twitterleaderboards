@@ -16,7 +16,9 @@ angular.module('LinkboardApp')
     $scope.twitterLogoutUrl = apiroot + '/logout';
 
     $scope.fetchUser = function () {
-      $scope.auth = leaderboard.user(function () {
+      leaderboard.user().$promise.then(function (auth) {
+        $scope.auth = auth;
+
         if ($scope.auth && $scope.auth.user) {
           $scope.user = $scope.auth.user;
           // console.log($scope.user);
@@ -25,6 +27,9 @@ angular.module('LinkboardApp')
         }
 
         $scope.loading = false;
+      }, function (login_error) {
+        console.error(login_error);
+        $scope.login_error = 'Login failed';
       });
     };
 
@@ -35,47 +40,76 @@ angular.module('LinkboardApp')
     };
 
     $scope.parseRawName = function () {
-      $scope.newlb.name = $scope.newlb.rawname;
+      var
+        raw = $scope.newlb.rawname,
+        matches = raw.match(/[\w,\-, \n]+/),
+        name
+      ;
+
+      name = (matches && matches.length)
+        ? matches[0]
+        : null
+      ;
+
+      if (name && name.length) {
+        name = name.substring(0,25);
+      }
+
+      $scope.newlb.name = name;
     };
 
     $scope.parseRawKeywords = function () {
-      $scope.newlb.topics = _.chain($scope.newlb.rawkeywords.split(/[\s,\,]/))
-        .compact()
-        .uniq()
-        // .filter(function (t) {
-        //   return (_.contains(t, '.'));
-        // })
-        .value();
+      try {
+        $scope.newlb.topics = _.chain($scope.newlb.rawkeywords.split(/[\s,\,]/))
+          .compact()
+          .uniq()
+          .filter(function (t) {
+            return t.length;
+          })
+          .map(function (t) {
+            return purl(t).attr('host');
+          })
+          .filter(function (h) {
+            return (h && h.length && (h.length < 128));
+          })
+          .map(function (h) {
+            if (-1 !== h.indexOf('.')) {
+              var parts = h.split('.');
+              return (parts && parts.length)
+                ? parts.reduce(function (a, b) {
+                  return (a.length > b.length)
+                    ? a
+                    : b
+                  ;
+                })
+                : null
+              ;
+            } else {
+              return h;
+            }
+          })
+          .compact()
+          .uniq()
+          .value()
+        ;
+      } catch (ex) {
+        $scope.newlb.topics = [];
+      }
+    };
+
+    $scope.validName = function () {
+      var n = ($scope.newlb) ? $scope.newlb.name : null;
+      return (n && n.length);
+    };
+
+    $scope.validKeywords = function () {
+      var t = ($scope.newlb) ? $scope.newlb.topics : null;
+
+      return (t && t.length && (t.length < 9));
     };
 
     $scope.formValid = function () {
-      var lb = $scope.newlb, v;
-
-      v = !!(
-        lb
-        &&
-        lb.rawname
-        &&
-        lb.rawname.length
-        &&
-        lb.name
-        &&
-        (lb.name.length > 5)
-        &&
-        (lb.name.length < 24)
-        &&
-        lb.rawkeywords
-        &&
-        lb.rawkeywords.length
-        &&
-        lb.topics
-        &&
-        lb.topics.length
-        &&
-        (lb.topics.length < 12)
-      );
-
-      return v;
+      return ($scope.validName() && $scope.validKeywords());
     };
 
     $scope.createLb = function () {
