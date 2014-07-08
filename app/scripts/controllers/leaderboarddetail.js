@@ -10,7 +10,7 @@
  * Controller of the LinkboardApp
  */
 angular.module('LinkboardApp')
-  .controller('LeaderboardDetailCtrl', function ($scope, $routeParams, $location, $timeout, leaderboard) {
+  .controller('LeaderboardDetailCtrl', function ($scope, $routeParams, $location, $timeout, util, leaderboard) {
 
     $scope.loading = true;
     $scope.sharingLb = false;
@@ -18,6 +18,9 @@ angular.module('LinkboardApp')
     $scope.deletingLb = false;
 
     $scope.lbid = $routeParams.lbid;
+
+    $scope.tabs = util.timewindows;
+    $scope.prettyUrl = util.prettyUrl;
 
     $scope.lbdetails = leaderboard.results(
       null,
@@ -60,7 +63,7 @@ angular.module('LinkboardApp')
 
           $timeout(function () {
             $location.path('/');
-          }, 250);
+          }, 1e3);
         }
       );
     };
@@ -104,4 +107,5 @@ angular.module('LinkboardApp')
         }
       );
     };
+
   });

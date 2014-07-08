@@ -1,3 +1,5 @@
+/*global purl */
+
 'use strict';
 
 /**
@@ -25,11 +27,11 @@ angular.module('LinkboardApp')
         } else {
           $scope.notloggedin = true;
         }
-
         $scope.loading = false;
       }, function (login_error) {
         console.error(login_error);
         $scope.login_error = 'Login failed';
+        $scope.loading = false;
       });
     };
 

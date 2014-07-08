@@ -16,28 +16,5 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/vendor/assets/font
 
 }
 
-.newlb-topics {
-  .label {
-    margin-left: 1em;
-  }
-}
-
-.how-it-works {
-
-  .glyphicon-user {
-    color: blue;
-  }
-
-  .glyphicon-bookmark {
-    color: purple;
-  }
-
-  .glyphicon-dashboard {
-    color: orange;
-  }
-
-  .glyphicon-heart {
-    color: red;
-  }
-
-}
+@import "./about.scss";
+@import "./leaderboard.scss";

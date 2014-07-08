@@ -32,6 +32,10 @@ angular
         templateUrl: 'views/leaderboarddetail.html',
         controller: 'LeaderboardDetailCtrl'
       })
+      .when('/pub/:pubid', {
+        templateUrl: 'views/pub.html',
+        controller: 'PubCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

@@ -24,31 +24,29 @@
       </ul>
 
       <div class="tab-content">
-        <div class="tab-pane" ng-class="{active: 'lasthour' == activetab }">
+        <div class="tab-pane"
+          ng-repeat="tab in tabs"
+          ng-class="{active: tab.name == activetab }">
 
-          <h5 class="text-center" ng-hide="lbdetails.rankings.3600000.length">
+          <h5 class="text-center" ng-hide="lbdetails.rankings[tab.timewindow].length">
             ugg, don't you just hate waiting for things to be ranked?
           </h5>
 
-          <div class="list-group">
-            <li class="list-group-item" ng-repeat="item in lbdetails.rankings.3600000">
-              <span class="badge">{{ item.sharecount }}</span>
-              <a target="_new" href="{{ item._id }}">{{ item._id }}</a>
-            </li>
-          </div>
-        </div>
-        <div class="tab-pane" ng-class="{active: 'lastday' == activetab }">
+          <ul class="list-unstyled ranked-items">
+            <li class="ranked-item" ng-repeat="item in lbdetails.rankings[tab.timewindow]">
 
-          <h5 class="text-center" ng-hide="lbdetails.rankings.3600000.length">
-            ugg, don't you just hate waiting for things to be ranked?
-          </h5>
+              <div class="ranked-item-stats">
+                <span class="ranked-item-sharecount">{{ item.sharecount }}</span>
+                <a class="ranked-item-comments" href ng-click="showTweets(item)"><i class="glyphicon glyphicon-comment"></i></a>
+              </div>
 
-          <div class="list-group">
-            <li class="list-group-item" ng-repeat="item in lbdetails.rankings.86400000">
-              <span class="badge">{{ item.sharecount }}</span>
-              <a target="_new" href="{{ item._id }}">{{ item._id }}</a>
+              <div class="ranked-item-link">
+                <a target="_new" href="{{ item._id }}">{{ prettyUrl(item._id) }}</a>
+              </div>
+
             </li>
-          </div>
+          </ul>
+
         </div>
       </div>
 

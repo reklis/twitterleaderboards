@@ -1,0 +1,32 @@
+.ranked-items {
+
+  .ranked-item {
+    clear: both;
+    padding: 1em;
+    margin: 1em;
+  }
+
+  .ranked-item-stats {
+    float: right;
+  }
+
+  .ranked-item-sharecount {
+    font-size: 200%;
+    color: #333;
+    border-radius: 5px;
+    padding: .25em .5em .25em .5em;
+  }
+
+  .ranked-item-comments {
+    font-size: 125%;
+  }
+
+  .ranked-item-link {
+    font-size: 150%;
+
+    a {
+      word-wrap: break-word;
+    }
+  }
+
+}

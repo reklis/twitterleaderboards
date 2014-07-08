@@ -21,6 +21,13 @@ angular.module('LinkboardApp')
           leaderboard_id: '@id'
         }
       },
+      pubresults: {
+        method: 'JSONP',
+        url: apiroot + '/pub/:pub_id/?callback=JSON_CALLBACK',
+        params: {
+          pub_id: '@id'
+        }
+      },
       remove: {
         method: 'JSONP',
         url: apiroot + '/lb/:leaderboard_id/remove?callback=JSON_CALLBACK',
