@@ -10,7 +10,10 @@
         share url: <a ng-href="{{ publish_url }}">{{ publish_url }}</a>
       </p>
 
-      <p class="text-muted">{{ lbdetails.lb.topics }}</p>
+      <p class="text-muted">
+        <i class="glyphicon glyphicon-screenshot"></i>
+        tracking: {{ lbdetails.lb.topics }}
+      </p>
     </div>
     <div class="panel-body">
 
@@ -23,21 +26,24 @@
         </li>
       </ul>
 
+
       <div class="tab-content">
         <div class="tab-pane"
           ng-repeat="tab in tabs"
           ng-class="{active: tab.name == activetab }">
 
-          <h5 class="text-center" ng-hide="lbdetails.rankings[tab.timewindow].length">
-            ugg, don't you just hate waiting for things to be ranked?
-          </h5>
+          <div class="alert alert-info" role="alert"
+            ng-hide="lbdetails.rankings[tab.timewindow].length">
+            <h1>(☞ﾟ∀ﾟ)☞</h1>
+            <p>Rad! You just created a linkboard!  This page will update as we count the tweets.</p>
+          </div>
 
           <ul class="list-unstyled ranked-items">
             <li class="ranked-item" ng-repeat="item in lbdetails.rankings[tab.timewindow]">
 
               <div class="ranked-item-stats">
                 <span class="ranked-item-sharecount">{{ item.sharecount }}</span>
-                <a class="ranked-item-comments" href ng-click="showTweets(item)"><i class="glyphicon glyphicon-comment"></i></a>
+                <a class="ranked-item-comments" href ng-click="showTw(item)"><i class="glyphicon glyphicon-comment"></i></a>
               </div>
 
               <div class="ranked-item-link">

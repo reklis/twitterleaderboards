@@ -137,4 +137,5 @@ angular.module('LinkboardApp')
 
     $scope.fetchUser();
 
-  });
+  })
+;

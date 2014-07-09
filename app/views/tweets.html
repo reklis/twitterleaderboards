@@ -1,0 +1,49 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">tweet log :: {{ prettyUrl(decoded_url) }}</h3>
+  </div>
+  <div class="panel-body">
+
+    <h3 ng-show="loading">Loading...</h3>
+
+    <div class="alert alert-danger" role="alert"
+      ng-show="fetch_error">
+      <h1>(;´༎ຶД༎ຶ`) </h1>
+      <p>something went horribly wrong, sorry</p>
+    </div>
+
+    <div class="tweet" >
+      <div class="user">
+
+        <span class="name">{{ t.src.user.name }}</span>
+
+      </div>
+      <div class="text">
+        <a href="http://twitter.com/{{ t.src.user.screen_name }}/status/{{ t.src.id_str }}">
+        </a>
+        <div class="meta">
+          <div class="location">{{ t.src.user.location }}</div>
+          <div class="created_at">{{ t.src.created_at }}</div>
+        </div>
+      </div>
+    </div>
+
+    <ul class="media-list">
+      <li class="media tweet" ng-repeat="t in tweets">
+        <a class="pull-left" href="http://twitter.com/{{ t.src.user.screen_name }}">
+          <img height="48" width="48" class="media-objectprofile_image_url" src="{{ t.src.user.profile_image_url}}" alt="">
+        </a>
+        <div class="media-body">
+          <h4 class="media-heading">@{{ t.src.user.screen_name }}</h4>
+          <a target="_new" href="http://twitter.com/{{ t.src.user.screen_name }}/status/{{ t.src.id_str }}">
+            {{ t.src.text }}
+          </a>
+          <div class="text-muted">
+            {{ prettyTime(t.src.created_at) }}
+          </div>
+        </div>
+      </li>
+    </ul>
+
+  </div>
+</div>

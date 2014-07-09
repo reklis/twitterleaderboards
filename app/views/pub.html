@@ -3,6 +3,16 @@
 <div ng-hide="loading">
 
   <h3>{{ lbdetails.lb.name }}</h3>
+  <h4 class="pull-right">
+    <span class="text-muted">created by</span>
+
+    <a href="http://twitter.com/{{ lbdetails.lb.user_name }}">{{ lbdetails.lb.user_name }}
+        <img
+          height="48" width="48"
+          ng-show="lbdetails.lb.user_photos.length"
+          ng-src="{{ lbdetails.lb.user_photos[0].value }}" alt=""></a>
+  </h4>
+
   <h4 class="text-muted">{{ lbdetails.lb.topics }}</h4>
 
   <ul class="nav nav-tabs" role="tablist">
@@ -19,9 +29,11 @@
       ng-repeat="tab in tabs"
       ng-class="{active: tab.name == activetab }">
 
-      <h5 class="text-center" ng-hide="lbdetails.rankings[tab.timewindow].length">
-        ugg, don't you just hate waiting for things to be ranked?
-      </h5>
+      <div class="alert alert-info" role="alert"
+        ng-hide="lbdetails.rankings[tab.timewindow].length">
+        <h1>{{ empty_animation_state }}</h1>
+        <p>Nothing to see yet, still counting tweets.</p>
+      </div>
 
       <ul class="list-unstyled ranked-items">
         <li class="ranked-item" ng-repeat="item in lbdetails.rankings[tab.timewindow]">
@@ -42,3 +54,4 @@
   </div>
 
 </div>
+

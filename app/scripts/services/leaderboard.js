@@ -56,6 +56,14 @@ angular.module('LinkboardApp')
         params: {
           leaderboard_id: '@id'
         }
+      },
+      tweets: {
+        method: 'JSONP',
+        url: apiroot + '/tweets/:encoded_url?callback=JSON_CALLBACK',
+        params: {
+          encoded_url: '@encoded_url'
+        }
       }
     });
-  });
+  })
+;

@@ -1,5 +1,11 @@
 $icon-font-path: "../bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/";
 
+@import url(http://fonts.googleapis.com/css?family=Raleway);
+
+* {
+  font-family: 'Raleway', sans-serif;
+}
+
 // bower:scss
 @import "bootstrap-sass-official/vendor/assets/stylesheets/bootstrap.scss";
 // endbower

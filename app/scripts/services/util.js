@@ -41,4 +41,8 @@ angular.module('LinkboardApp')
       }
     };
 
+    this.prettyTime = function (t) {
+      return moment(t).fromNow();
+    }
+
   });

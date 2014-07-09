@@ -19,4 +19,5 @@ angular.module('LinkboardApp')
       { icon: 'dashboard', text: 'Links shared on twitter are detected, counted and ranked' },
       { icon: 'heart', text: 'Discover new stuff to love :)' }
     ];
-  });
+  })
+;

@@ -36,6 +36,10 @@ angular
         templateUrl: 'views/pub.html',
         controller: 'PubCtrl'
       })
+      .when('/tweets/:encoded_url', {
+        templateUrl: 'views/tweets.html',
+        controller: 'TweetsCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

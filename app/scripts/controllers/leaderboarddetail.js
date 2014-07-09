@@ -108,4 +108,10 @@ angular.module('LinkboardApp')
       );
     };
 
-  });
+    $scope.showTw = function (lbitem) {
+      var encoded_uri = encodeURIComponent(lbitem._id);
+      $location.path('/tweets/' + encoded_uri);
+    };
+
+  })
+;
