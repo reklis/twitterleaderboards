@@ -70,7 +70,7 @@
 
               <div
                 class="form-group has-feedback"
-                ng-class="{'has-error': !validName(), 'has-success': validName()}">
+                ng-class="{'has-success': validName()}">
 
                 <label for="input-lbname" class="control-label">Name for it:</label>
                 <input type="text" class="form-control" id="input-lbname"
@@ -78,12 +78,11 @@
                   ng-change="parseRawName()"
                   placeholder="hacker stuff">
                 <span ng-show="validName()" class="glyphicon glyphicon-ok form-control-feedback"></span>
-                <span ng-show="!validName()" class="glyphicon glyphicon-remove form-control-feedback"></span>
               </div>
 
               <div
                 class="form-group has-feedback"
-                ng-class="{'has-error': !validKeywords(), 'has-success': validKeywords()}">
+                ng-class="{'has-success': validKeywords()}">
 
                 <label for="input-lbkeywords" class="control-label">Up to 8 domains to watch:</label>
                 <input type="text" class="form-control" id="input-lbkeywords"
@@ -91,7 +90,6 @@
                   ng-change="parseRawKeywords()"
                   placeholder="github, ycombinator, slashdot">
                 <span ng-show="validKeywords()" class="glyphicon glyphicon-ok form-control-feedback"></span>
-                <span ng-show="!validKeywords()" class="glyphicon glyphicon-remove form-control-feedback"></span>
               </div>
 
             </form>
