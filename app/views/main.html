@@ -52,8 +52,45 @@
       </div>
     </div>
   </div>
+
 </div>
 
+
+<div ng-show="mostrecent.length">
+
+<hr>
+
+<h3>Recently Published</h3>
+
+<div class="row">
+
+  <div class="col-sm-6"
+    ng-repeat="r in mostrecent">
+
+    <blockquote>
+      <a ng-href="#/pub/{{ r.publish_key }}">
+        {{ r.name }} <i class="glyphicon glyphicon-chevron-right"></i>
+      </a>
+
+      <h5 class="text-muted">{{ r.topics }}</h5>
+
+      <a href="http://twitter.com/{{ r.user_name }}">
+        <img
+          width="48" height="48"
+          ng-show="r.user_photos.length"
+          src="{{ r.user_photos[0].value }}" alt="">
+        {{ r.user_name }}
+      </a>
+    </blockquote>
+
+  </div>
+
+</div>
+
+</div>
+
+
+<!-- modals -->
 
 <div id="create-lb-modal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" >
   <div class="modal-dialog modal-lg">

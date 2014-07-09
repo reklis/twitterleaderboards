@@ -63,6 +63,10 @@ angular.module('LinkboardApp')
         params: {
           encoded_url: '@encoded_url'
         }
+      },
+      recent: {
+        method: 'JSONP',
+        url: apiroot + '/recent?callback=JSON_CALLBACK'
       }
     });
   })

@@ -17,6 +17,8 @@ angular.module('LinkboardApp')
     $scope.twitterLoginUrl = apiroot + '/auth/twitter';
     $scope.twitterLogoutUrl = apiroot + '/logout';
 
+    $scope.mostrecent = [];
+
     $scope.fetchUser = function () {
       leaderboard.user().$promise.then(function (auth) {
         $scope.auth = auth;
@@ -38,6 +40,18 @@ angular.module('LinkboardApp')
         $scope.login_error = 'Login failed';
         $scope.loading = false;
       });
+    };
+
+    $scope.fetchRecent = function () {
+      leaderboard.recent().$promise.then(
+        function (result) {
+          $scope.mostrecent = result.recent;
+          console.dir(result);
+        },
+        function (error) {
+          console.error(error);
+        }
+      );
     };
 
     $scope.showCreateLbForm = function () {
@@ -144,6 +158,7 @@ angular.module('LinkboardApp')
     };
 
     $scope.fetchUser();
+    $scope.fetchRecent();
 
   })
 ;
