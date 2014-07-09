@@ -43,8 +43,11 @@ angular.module('LinkboardApp')
     $scope.showCreateLbForm = function () {
       $scope.newlb = {};
       $('#create-lb-modal').modal('show');
-      $('#input-lbname').focus();
     };
+
+    $('#create-lb-modal').on('shown.bs.modal', function () {
+      $('#input-lbname').focus();
+    });
 
     $scope.parseRawName = function () {
       var
