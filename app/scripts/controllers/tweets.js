@@ -14,9 +14,10 @@ angular.module('LinkboardApp')
     $scope.encoded_url = $routeParams.encoded_url;
     $scope.decoded_url = decodeURIComponent($routeParams.encoded_url);
 
-    leaderboard.tweets({
-      encoded_url: $scope.encoded_url
-    }).$promise.then(function (result) {
+    leaderboard.tweets(
+      null,
+      { encoded_url: $scope.encoded_url}
+    ).$promise.then(function (result) {
 
       $scope.tweets = result.tweets.sort(function (a, b) {
         var

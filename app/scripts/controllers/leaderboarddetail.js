@@ -19,24 +19,25 @@ angular.module('LinkboardApp')
 
     $scope.lbid = $routeParams.lbid;
 
-    leaderboard.results({ id: $scope.lbid })
-      .$promise.then(function (lbdetails) {
-        var maintw = $rootScope.timewindows[0];
+    leaderboard.results(
+      null,
+      { id: $scope.lbid }
+    ).$promise.then(function (lbdetails) {
+      var maintw = $rootScope.timewindows[0];
 
-        $scope.lbdetails = lbdetails;
+      $scope.lbdetails = lbdetails;
 
-        $scope.loading = false;
+      $scope.loading = false;
 
-        $scope.activetab = maintw.name;
-        $scope.updatePublishUrl($scope.lbdetails.lb.publish_key);
+      $scope.activetab = maintw.name;
+      $scope.updatePublishUrl($scope.lbdetails.lb.publish_key);
 
-      }, function (ex) {
-        $scope.loading = false;
+    }, function (ex) {
+      $scope.loading = false;
 
-        console.error(ex);
-        $location.path('/');
-      }
-    );
+      console.error(ex);
+      $location.path('/');
+    });
 
     $scope.updatePublishUrl = function (publish_key) {
       var u = window.location;
