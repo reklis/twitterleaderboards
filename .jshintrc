@@ -20,6 +20,8 @@
   "globals": {
     "angular": false,
     "$": false,
-    "_": false
+    "_": false,
+    "purl": false,
+    "moment": false
   }
 }

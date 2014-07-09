@@ -8,30 +8,27 @@
  * Controller of the LinkboardApp
  */
 angular.module('LinkboardApp')
-  .controller('PubCtrl', function ($scope, $routeParams, $location, $timeout, util, leaderboard) {
+  .controller('PubCtrl', function ($rootScope, $scope, $routeParams, $location, $timeout, leaderboard) {
 
     $scope.loading = true;
-
     $scope.pubid = $routeParams.pubid;
-
-    $scope.tabs = util.timewindows;
-    $scope.prettyUrl = util.prettyUrl;
 
     leaderboard.pubresults(
       null,
       { id: $scope.pubid }
     ).$promise.then(
       function (lbdetails) {
-        console.dir(lbdetails);
+        var maintw = $rootScope.timewindows[0];
+        // console.dir(lbdetails);
 
         $scope.lbdetails = lbdetails;
 
-        $scope.activetab = 'lasthour';
+        $scope.activetab = maintw.name;
         // $scope.updatePublishUrl($scope.lbdetails.lb.publish_key);
 
         $scope.loading = false;
 
-        if (!lbdetails.rankings[util.timewindows[0].timewindow].length) {
+        if (!lbdetails.rankings[maintw.timewindow].length) {
           startAnimation();
         }
       },

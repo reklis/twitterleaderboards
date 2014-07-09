@@ -10,7 +10,7 @@
  * Controller of the LinkboardApp
  */
 angular.module('LinkboardApp')
-  .controller('LeaderboardDetailCtrl', function ($scope, $routeParams, $location, $timeout, util, leaderboard) {
+  .controller('LeaderboardDetailCtrl', function ($scope, $rootScope, $routeParams, $location, $timeout, leaderboard) {
 
     $scope.loading = true;
     $scope.sharingLb = false;
@@ -19,24 +19,24 @@ angular.module('LinkboardApp')
 
     $scope.lbid = $routeParams.lbid;
 
-    $scope.tabs = util.timewindows;
-    $scope.prettyUrl = util.prettyUrl;
+    leaderboard.results({ id: $scope.lbid })
+      .$promise.then(function (lbdetails) {
+        var maintw = $rootScope.timewindows[0];
 
-    $scope.lbdetails = leaderboard.results(
-      null,
-      { id: $scope.lbid },
-      function () {
+        $scope.lbdetails = lbdetails;
+
         $scope.loading = false;
 
-        $scope.activetab = 'lasthour';
+        $scope.activetab = maintw.name;
         $scope.updatePublishUrl($scope.lbdetails.lb.publish_key);
+
+      }, function (ex) {
+        $scope.loading = false;
+
+        console.error(ex);
+        $location.path('/');
       }
     );
-
-    $scope.lbdetails.$promise.catch(function (ex) {
-      console.error(ex);
-      $location.path('/');
-    });
 
     $scope.updatePublishUrl = function (publish_key) {
       var u = window.location;
@@ -106,11 +106,6 @@ angular.module('LinkboardApp')
           $('#confirm-unshare-modal').modal('hide');
         }
       );
-    };
-
-    $scope.showTw = function (lbitem) {
-      var encoded_uri = encodeURIComponent(lbitem._id);
-      $location.path('/tweets/' + encoded_uri);
     };
 
   })

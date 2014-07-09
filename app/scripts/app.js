@@ -43,4 +43,43 @@ angular
       .otherwise({
         redirectTo: '/'
       });
-  });
+  })
+  .run(function ($rootScope, $location) {
+    $rootScope.timewindows = [
+      { name: 'lasthour', timewindow: 3600000 },
+      { name: 'lastday', timewindow: 86400000 }
+    ];
+
+    $rootScope.prettyUrl = function (u) {
+      try {
+        var parsed = purl(u);
+
+        return parsed.attr('host')
+          + ' '
+          + parsed.attr('path')
+            .replace(/\//g, ' ')
+        ;
+      } catch (ex) {
+        return u.split('/')
+          .filter(function (t) {
+            return (t && (t.length > 1) && (t.length < 100));
+          })
+          .join(' ')
+          .replace(/.*?:/, '')
+          .replace(/%[\w\n]+/g, ' ')
+          .replace(/[\?,=,_,~]/g, ' ')
+          .replace(/.htm/, '')
+        ;
+      }
+    };
+
+    $rootScope.prettyTime = function (t) {
+      return moment(t).fromNow();
+    };
+
+    $rootScope.showTw = function (lbitem) {
+      var encoded_uri = encodeURIComponent(lbitem._id);
+      $location.path('/tweets/' + encoded_uri);
+    };
+  })
+;

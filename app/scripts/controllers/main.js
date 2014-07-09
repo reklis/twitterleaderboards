@@ -23,6 +23,11 @@ angular.module('LinkboardApp')
 
         if ($scope.auth && $scope.auth.user) {
           $scope.user = $scope.auth.user;
+
+          if (!$scope.user.leaderboards) {
+            $scope.user.leaderboards = [];
+          }
+
           // console.log($scope.user);
         } else {
           $scope.notloggedin = true;

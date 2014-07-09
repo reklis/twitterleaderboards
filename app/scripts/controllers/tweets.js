@@ -8,10 +8,7 @@
  * Controller of the LinkboardApp
  */
 angular.module('LinkboardApp')
-  .controller('TweetsCtrl', function ($scope, $routeParams, $location, util, leaderboard) {
-
-    $scope.prettyUrl = util.prettyUrl;
-    $scope.prettyTime = util.prettyTime;
+  .controller('TweetsCtrl', function ($scope, $routeParams, $location, leaderboard) {
 
     $scope.loading = true;
     $scope.encoded_url = $routeParams.encoded_url;
