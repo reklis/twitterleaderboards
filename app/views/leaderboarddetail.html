@@ -12,7 +12,8 @@
 
       <p class="text-muted">
         <i class="glyphicon glyphicon-screenshot"></i>
-        tracking: {{ lbdetails.lb.topics }}
+        tracking: <span class="badge"
+          ng-repeat="t in lbdetails.lb.topics">{{ t }}</span>
       </p>
     </div>
     <div class="panel-body">
