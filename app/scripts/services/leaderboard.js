@@ -40,7 +40,8 @@ angular.module('LinkboardApp')
         url: apiroot + '/lb/create?callback=JSON_CALLBACK',
         params: {
           name: '@name',
-          topics: '@topics'
+          topics: '@topics',
+          domains: '@domains'
         }
       },
       publish: {

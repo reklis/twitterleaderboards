@@ -97,7 +97,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title">Create Linkboard</h4>
+        <h4 class="modal-title">New things shiny!</h4>
       </div>
       <div class="modal-body">
 
@@ -109,11 +109,11 @@
                 class="form-group has-feedback"
                 ng-class="{'has-success': validName()}">
 
-                <label for="input-lbname" class="control-label">Name for it:</label>
+                <label for="input-lbname" class="control-label">Create a LinkBoard named:</label>
                 <input type="text" class="form-control" id="input-lbname"
                   ng-model="newlb.rawname"
                   ng-change="parseRawName()"
-                  placeholder="hacker stuff">
+                  placeholder="airport photos">
                 <span ng-show="validName()" class="glyphicon glyphicon-ok form-control-feedback"></span>
               </div>
 
@@ -121,21 +121,38 @@
                 class="form-group has-feedback"
                 ng-class="{'has-success': validKeywords()}">
 
-                <label for="input-lbkeywords" class="control-label">Up to 8 domains to watch:</label>
+                <label for="input-lbkeywords" class="control-label">Tracking these terms:</label>
                 <input type="text" class="form-control" id="input-lbkeywords"
                   ng-model="newlb.rawkeywords"
                   ng-change="parseRawKeywords()"
-                  placeholder="github, ycombinator, slashdot">
+                  placeholder="#BUE, #CHI, #LON, #MIL, #TYO">
+                <span ng-show="validKeywords()" class="glyphicon glyphicon-ok form-control-feedback"></span>
+              </div>
+
+              <div
+                class="form-group has-feedback"
+                ng-class="{'has-success': validDomains()}">
+
+                <label for="input-lbdomains" class="control-label">And count links to these domains:</label>
+                <input type="text" class="form-control" id="input-lbdomains"
+                  ng-model="newlb.rawdomains"
+                  ng-change="parseRawDomains()"
+                  placeholder="instagram, smugmug, photobucket">
                 <span ng-show="validKeywords()" class="glyphicon glyphicon-ok form-control-feedback"></span>
               </div>
 
             </form>
           </div>
           <div class="col-sm-6">
-            <h3 class="text-muted">create new linkboard</h3>
+            <h3 class="text-muted">new linkboard settings:</h3>
             <h4>{{ newlb.name }}</h4>
+            <p>topics</p>
             <ul>
               <li ng-repeat="t in newlb.topics">{{ t }}</li>
+            </ul>
+            <p>domains</p>
+            <ul>
+              <li ng-repeat="d in newlb.domains">{{ d }}</li>
             </ul>
           </div>
         </div>

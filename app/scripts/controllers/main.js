@@ -1,5 +1,3 @@
-/*global purl */
-
 'use strict';
 
 /**
@@ -87,39 +85,25 @@ angular.module('LinkboardApp')
         $scope.newlb.topics = _.chain($scope.newlb.rawkeywords.split(/[\s,\,]/))
           .compact()
           .uniq()
-          .filter(function (t) {
-            return t.length;
-          })
-          .map(function (t) {
-            return purl(t).attr('host');
-          })
-          .filter(function (h) {
-            return (h && h.length && (h.length < 128));
-          })
-          .map(function (h) {
-            if (-1 !== h.indexOf('.')) {
-              var parts = h.split('.');
-              return (parts && parts.length)
-                ? parts.reduce(function (a, b) {
-                  return (a.length > b.length)
-                    ? a
-                    : b
-                  ;
-                })
-                : null
-              ;
-            } else {
-              return h;
-            }
-          })
-          .compact()
-          .uniq()
           .value()
         ;
       } catch (ex) {
         $scope.newlb.topics = [];
       }
     };
+
+    $scope.parseRawDomains = function () {
+      try {
+        $scope.newlb.domains = _.chain($scope.newlb.rawdomains.split(/[\s,\,]/))
+          .compact()
+          .uniq()
+          .value()
+        ;
+      } catch (ex) {
+        $scope.newlb.domains = [];
+      }
+    };
+
 
     $scope.validName = function () {
       var n = ($scope.newlb) ? $scope.newlb.name : null;
@@ -128,12 +112,16 @@ angular.module('LinkboardApp')
 
     $scope.validKeywords = function () {
       var t = ($scope.newlb) ? $scope.newlb.topics : null;
-
       return (t && t.length && (t.length < 9));
     };
 
+    $scope.validDomains = function () {
+      var d = ($scope.newlb) ? $scope.newlb.domains : null;
+      return (d && d.length && (d.length < 9));
+    };
+
     $scope.formValid = function () {
-      return ($scope.validName() && $scope.validKeywords());
+      return ($scope.validName() && $scope.validKeywords() && $scope.validDomains());
     };
 
     $scope.createLb = function () {
