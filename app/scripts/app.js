@@ -36,7 +36,7 @@ angular
         templateUrl: 'views/pub.html',
         controller: 'PubCtrl'
       })
-      .when('/tweets/:encoded_url', {
+      .when('/tweets/:user_id/:leaderboard_id/:encoded_url', {
         templateUrl: 'views/tweets.html',
         controller: 'TweetsCtrl'
       })
@@ -77,9 +77,9 @@ angular
       return moment(t).fromNow();
     };
 
-    $rootScope.showTw = function (lbitem) {
+    $rootScope.showTw = function (user_id, leaderboard_id, lbitem) {
       var encoded_uri = encodeURIComponent(lbitem._id);
-      $location.path('/tweets/' + encoded_uri);
+      $location.path('/tweets/' + user_id + '/' + leaderboard_id + '/' + encoded_uri);
     };
   })
 ;

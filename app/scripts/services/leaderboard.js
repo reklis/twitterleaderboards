@@ -59,8 +59,10 @@ angular.module('LinkboardApp')
       },
       tweets: {
         method: 'JSONP',
-        url: apiroot + '/tweets/:encoded_url?callback=JSON_CALLBACK',
+        url: apiroot + '/tweets/:user_id/:leaderboard_id/:encoded_url?callback=JSON_CALLBACK',
         params: {
+          user_id: '@user_id',
+          leaderboard_id: '@leaderboard_id',
           encoded_url: '@encoded_url'
         }
       },

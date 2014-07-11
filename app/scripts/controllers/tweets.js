@@ -16,7 +16,11 @@ angular.module('LinkboardApp')
 
     leaderboard.tweets(
       null,
-      { encoded_url: $scope.encoded_url}
+      {
+        user_id: $routeParams.user_id,
+        leaderboard_id: $routeParams.leaderboard_id,
+        encoded_url: $scope.encoded_url
+      }
     ).$promise.then(function (result) {
 
       $scope.tweets = result.tweets.sort(function (a, b) {

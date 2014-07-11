@@ -42,7 +42,10 @@
 
           <div class="ranked-item-stats">
             <span class="ranked-item-sharecount">{{ item.sharecount }}</span>
-            <a class="ranked-item-comments" href ng-click="showTw(item)"><i class="glyphicon glyphicon-comment"></i></a>
+            <a class="ranked-item-comments"
+              href
+              ng-click="showTw(lbdetails.lb.user_id, lbdetails.lb.leaderboard_id, item)">
+              <i class="glyphicon glyphicon-comment"></i></a>
           </div>
 
           <div class="ranked-item-link">
