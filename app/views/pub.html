@@ -13,7 +13,10 @@
           ng-src="{{ lbdetails.lb.user_photos[0].value }}" alt=""></a>
   </h4>
 
-  <h4 class="text-muted">{{ lbdetails.lb.topics }}</h4>
+  <ul class="list-inline">
+    <li
+      ng-repeat="t in lbdetails.lb.topics"><kbd>{{ t }}</kbd></li>
+  </ul>
 
   <div class="clearfix"></div>
 
