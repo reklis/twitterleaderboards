@@ -74,7 +74,7 @@ angular.module('LinkboardApp')
       ;
 
       if (name && name.length) {
-        name = name.substring(0,25);
+        name = name.substring(0, 32);
       }
 
       $scope.newlb.name = name;
@@ -83,6 +83,9 @@ angular.module('LinkboardApp')
     $scope.parseRawKeywords = function () {
       try {
         $scope.newlb.topics = _.chain($scope.newlb.rawkeywords.split(/[\s,\,]/))
+          .map(function (t) {
+            return t.substring(0, 32);
+          })
           .compact()
           .uniq()
           .value()
@@ -95,6 +98,9 @@ angular.module('LinkboardApp')
     $scope.parseRawDomains = function () {
       try {
         $scope.newlb.domains = _.chain($scope.newlb.rawdomains.split(/[\s,\,]/))
+          .map(function (d) {
+            return d.substring(0, 32);
+          })
           .compact()
           .uniq()
           .value()

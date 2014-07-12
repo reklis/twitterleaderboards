@@ -19,7 +19,7 @@
 
       </div>
       <div class="text">
-        <a href="http://twitter.com/{{ t.src.user.screen_name }}/status/{{ t.src.id_str }}">
+        <a target="_new" href="http://twitter.com/{{ t.src.user.screen_name }}/status/{{ t.src.id_str }}">
         </a>
         <div class="meta">
           <div class="location">{{ t.src.user.location }}</div>
@@ -30,7 +30,8 @@
 
     <ul class="media-list">
       <li class="media tweet" ng-repeat="t in tweets">
-        <a class="pull-left" href="http://twitter.com/{{ t.src.user.screen_name }}">
+        <a class="pull-left"
+          target="_new" href="http://twitter.com/{{ t.src.user.screen_name }}">
           <img height="48" width="48" class="media-objectprofile_image_url" src="{{ t.src.user.profile_image_url}}" alt="">
         </a>
         <div class="media-body">
