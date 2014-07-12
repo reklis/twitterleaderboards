@@ -81,5 +81,9 @@ angular
       var encoded_uri = encodeURIComponent(lbitem._id);
       $location.path('/tweets/' + user_id + '/' + leaderboard_id + '/' + encoded_uri);
     };
+
+    $rootScope.goHome = function () {
+      $location.path('/');
+    };
   })
 ;
