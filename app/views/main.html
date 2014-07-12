@@ -65,17 +65,20 @@
     ng-repeat="r in mostrecent">
 
     <blockquote>
-      <a ng-href="#/pub/{{ r.publish_key }}">
+      <p><a ng-href="#/pub/{{ r.publish_key }}">
         {{ r.name }} <i class="glyphicon glyphicon-chevron-right"></i>
-      </a>
+      </a></p>
 
-      <a href="http://twitter.com/{{ r.user_name }}">
+      <ul class="list-inline"><li class="text-muted" ng-repeat="t in r.topics">{{ t }}</li></ul>
+      <ul class="list-inline"><li class="text-muted" ng-repeat="d in r.domains">{{ d }}</li></ul>
+
+      <p><a target="_new" href="http://twitter.com/{{ r.user_name }}">
         <img
           width="48" height="48"
           ng-show="r.user_photos.length"
           ng-src="{{ r.user_photos[0].value }}" alt="">
         {{ r.user_name }}
-      </a>
+      </a></p>
     </blockquote>
 
   </div>
