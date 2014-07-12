@@ -23,7 +23,7 @@ angular.module('LinkboardApp')
       },
       pubresults: {
         method: 'JSONP',
-        url: apiroot + '/pub/:pub_id/?callback=JSON_CALLBACK',
+        url: apiroot + '/pub/:pub_id?callback=JSON_CALLBACK',
         params: {
           pub_id: '@id'
         }
