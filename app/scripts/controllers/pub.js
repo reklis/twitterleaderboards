@@ -28,7 +28,9 @@ angular.module('LinkboardApp')
 
         $scope.loading = false;
 
-        if (!lbdetails.rankings[maintw.timewindow].length) {
+        if (!lbdetails.rankings[maintw.timewindow]
+          || !lbdetails.rankings[maintw.timewindow].length
+        ) {
           startAnimation();
         }
       },
