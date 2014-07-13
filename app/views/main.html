@@ -22,7 +22,8 @@
 
   <div class="panel panel-default">
     <div class="panel-heading">
-      {{ user.oauth.profile.displayName }} (<a target="_new" ng-href="http://twitter.com/{{ user.oauth.profile.username }}">@{{ user.oauth.profile.username }}</a>)
+      {{ user.oauth.profile.displayName }}
+      (<a target="_new" ng-href="http://twitter.com/{{ user.oauth.profile.username }}">@{{ user.oauth.profile.username }}</a>)
 
       <a class="pull-right" href="{{ twitterLogoutUrl }}">Logout</a>
     </div>
@@ -34,6 +35,7 @@
         <div class="col-sm-6" ng-repeat="lb in user.leaderboards">
           <h4><a ng-href="#/linkboard/{{ lb._id }}">{{ lb.name }}</a></h4>
           <p><span class="badge" ng-repeat="t in lb.topics">{{ t }}</span></p>
+          <ul class="list-inline"><li class="text-muted" ng-repeat="d in lb.domains">{{ d }}</li></ul>
         </div>
       </div>
 
@@ -69,7 +71,8 @@
         {{ r.name }} <i class="glyphicon glyphicon-chevron-right"></i>
       </a></p>
 
-      <ul class="list-inline"><li class="text-muted" ng-repeat="t in r.topics">{{ t }}</li></ul>
+      <span class="badge pull-right" ng-repeat="t in r.topics">{{ t }}</span>
+
       <ul class="list-inline"><li class="text-muted" ng-repeat="d in r.domains">{{ d }}</li></ul>
 
       <p><a target="_new" href="http://twitter.com/{{ r.user_name }}">

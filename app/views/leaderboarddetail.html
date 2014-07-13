@@ -10,11 +10,25 @@
         share url: <a ng-href="{{ publish_url }}">{{ publish_url }}</a>
       </p>
 
+      <p ng-hide="publish_url">
+        <i class="glyphicon glyphicon-cloud"></i>
+        share url: private
+      </p>
+
       <p class="text-muted">
-        <i class="glyphicon glyphicon-screenshot"></i>
-        tracking: <span class="badge"
+        <i class="glyphicon glyphicon-tags"></i>
+        topics:
+        <span class="badge"
           ng-repeat="t in lbdetails.lb.topics">{{ t }}</span>
       </p>
+
+      <p class="text-muted">
+        <i class="glyphicon glyphicon-filter"></i>
+        domains:
+        <span class="badge"
+          ng-repeat="d in lbdetails.lb.domains">{{ d }}</span>
+      </p>
+
     </div>
     <div class="panel-body">
 

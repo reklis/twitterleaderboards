@@ -13,9 +13,16 @@
           ng-src="{{ lbdetails.lb.user_photos[0].value }}" alt=""></a>
   </h4>
 
+  <p>
+    <span class="badge"
+      ng-repeat="t in lbdetails.lb.topics">{{ t }}</span>
+    </span>
+  </p>
+
   <ul class="list-inline">
     <li
-      ng-repeat="t in lbdetails.lb.topics"><kbd>{{ t }}</kbd></li>
+      class="text-muted"
+      ng-repeat="d in lbdetails.lb.domains">{{ d }}</li>
   </ul>
 
   <div class="clearfix"></div>
@@ -37,7 +44,7 @@
       <div class="alert alert-info" role="alert"
         ng-hide="lbdetails.rankings[tab.timewindow].length">
         <h1>{{ empty_animation_state }}</h1>
-        <p>Nothing to see yet, still counting tweets.</p>
+        <p>Nothing to see here, still counting tweets.  If this message continues that means there aren't enough tweets that match this topic on these domains.</p>
       </div>
 
       <ul class="list-unstyled ranked-items">
