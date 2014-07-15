@@ -45,7 +45,8 @@ module.exports = function (grunt) {
       production: {
         constants: {
           environment: 'production',
-          apiroot: 'http://polar-eyrie-5877.herokuapp.com'
+          //apiroot: 'http://polar-eyrie-5877.herokuapp.com'
+          apiroot: 'http://api.twitterleaderboards.com'
         }
       }
     },
