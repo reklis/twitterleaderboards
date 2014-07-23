@@ -10,7 +10,8 @@
 angular.module('LinkboardApp')
   .controller('AboutCtrl', function ($scope) {
     $scope.contactInfo = {
-      twitterhandle: 'sfusco'
+      twitterhandle: 'sfusco',
+      githubrepo: 'https://github.com/reklis/twitterleaderboards'
     };
 
     $scope.steps = [
@@ -28,6 +29,7 @@ angular.module('LinkboardApp')
       { href: 'https://twitter.com/mongohq', name: 'mongohq' },
       { href: 'https://twitter.com/mongolab', name: 'mongolab' },
       { href: 'https://twitter.com/RedisLabsInc', name: 'redis labs' },
+      { href: 'https://twitter.com/github', name: 'github' }
     ];
   })
 ;
