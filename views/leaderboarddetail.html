@@ -1,1 +1,171 @@
-<h4 ng-show="loading">Loading...</h4> <div ng-hide="loading"> <div class="panel panel-default"> <div class="panel-heading"> <h4>{{ lbdetails.lb.name }}</h4> <p ng-show="publish_url"> <i class="glyphicon glyphicon-cloud"></i> share url: <a ng-href="{{ publish_url }}">{{ publish_url }}</a> </p> <p ng-hide="publish_url"> <i class="glyphicon glyphicon-cloud"></i> share url: private </p> <p class="text-muted"> <i class="glyphicon glyphicon-tags"></i> topics: <span class="badge" ng-repeat="t in lbdetails.lb.topics">{{ t }}</span> </p> <p class="text-muted"> <i class="glyphicon glyphicon-filter"></i> domains: <span class="badge" ng-repeat="d in lbdetails.lb.domains">{{ d }}</span> </p> </div> <div class="panel-body"> <ul class="nav nav-tabs" role="tablist"> <li ng-class="{active: 'lasthour' == activetab }"> <a href ng-click="activetab = 'lasthour'">Last Hour</a> </li> <li ng-class="{active: 'lastday' == activetab }"> <a href ng-click="activetab = 'lastday'">Last Day</a> </li> </ul> <div class="tab-content"> <div class="tab-pane" ng-repeat="tab in timewindows" ng-class="{active: tab.name == activetab }"> <div class="alert alert-info" role="alert" ng-hide="lbdetails.rankings[tab.timewindow].length"> <h1>(☞ﾟ∀ﾟ)☞</h1> <p>Rad! You just created a linkboard! This page will update as we count the tweets.</p> </div> <ul class="list-unstyled ranked-items"> <li class="ranked-item" ng-repeat="item in lbdetails.rankings[tab.timewindow]"> <div class="ranked-item-stats"> <span class="ranked-item-sharecount">{{ item.sharecount }}</span> <a class="ranked-item-comments" href ng-click="showTw(lbdetails.lb.user_id, lbdetails.lb.leaderboard_id, item)"> <i class="glyphicon glyphicon-comment"></i></a> </div> <div class="ranked-item-link"> <a target="_new" href="{{ item._id }}">{{ prettyUrl(item._id) }}</a> </div> </li> </ul> </div> </div> </div> <div class="panel-footer"> <button ng-hide="publish_url" class="btn btn-success" ng-click="confirmShareLb()"> <span class="glyphicon glyphicon-send"></span> Share </button> <button ng-show="publish_url" class="btn btn-warning" ng-click="confirmUnShareLb()"> <span class="glyphicon glyphicon-ban-circle"></span> Stop Sharing </button> <button class="btn btn-danger" ng-click="confirmDeleteLb()"> <span class="glyphicon glyphicon-trash"></span> Delete </button> </div> </div> </div> <!-- modals --> <div id="confirm-share-modal" class="modal fade" tabindex="-1" role="dialog"> <div class="modal-dialog"> <div class="modal-content"> <div class="modal-header"> <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button> <h4 class="modal-title">Share Linkboard</h4> </div> <div class="modal-body"> <p>This thing is pretty cool, let's send it to somebody</p> </div> <div class="modal-footer"> <div ng-hide="sharingLb"> <button type="button" class="btn btn-default" data-dismiss="modal">Uhh, Maybe later</button> <button type="button" class="btn btn-success" ng-click="shareLb()"> <span class="glyphicon glyphicon-send"></span> Why are you always preparing? Publish! </button> </div> <div ng-show="sharingLb"> <p class="text-muted"><kbd>(∩｀-´)⊃━☆ﾟ.*･｡ﾟ</kbd></p> </div> </div> </div> </div> </div> <div id="confirm-unshare-modal" class="modal fade" tabindex="-1" role="dialog"> <div class="modal-dialog"> <div class="modal-content"> <div class="modal-header"> <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button> <h4 class="modal-title">Stop Sharing Linkboard?</h4> </div> <div class="modal-body"> <p>Sharing is overrated, I just want to keep it all to myself.</p> <p>share url: <strong>{{ publish_url }}</strong></p> </div> <div class="modal-footer"> <div ng-hide="unsharingLb"> <button type="button" class="btn btn-default" data-dismiss="modal">Sorry, Wrong Button</button> <button type="button" class="btn btn-warning" ng-click="unshareLb()"> <span class="glyphicon glyphicon-ban-circle"></span> Stop Sharing!! </button> </div> <div ng-show="unsharingLb"> <p class="text-muted"><kbd>(╯︵╰,)</kbd></p> </div> </div> </div> </div> </div> <div id="confirm-delete-modal" class="modal fade" tabindex="-1" role="dialog"> <div class="modal-dialog"> <div class="modal-content"> <div class="modal-header"> <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button> <h4 class="modal-title">Delete Linkboard</h4> </div> <div class="modal-body"> <p>If you throw this away, you'll need to make one again. Which is totally easy anyway.</p> </div> <div class="modal-footer"> <div ng-hide="deletingLb"> <button type="button" class="btn btn-default" data-dismiss="modal">Whoops, Nevermind</button> <button type="button" class="btn btn-danger" ng-click="deleteLb()"> <span class="glyphicon glyphicon-trash"></span> Trash it Already </button> </div> <div ng-show="deletingLb"> <p class="text-muted"><kbd>(╯°□°）╯︵ ┻━┻</kbd></p> </div> </div> </div> </div> </div>
+<h4 ng-show="loading">Loading...</h4>
+
+<div ng-hide="loading">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4>{{ lbdetails.lb.name }}</h4>
+
+      <p ng-show="publish_url">
+        <i class="glyphicon glyphicon-cloud"></i>
+        share url: <a ng-href="{{ publish_url }}">{{ publish_url }}</a>
+      </p>
+
+      <p ng-hide="publish_url">
+        <i class="glyphicon glyphicon-cloud"></i>
+        share url: private
+      </p>
+
+      <p class="text-muted">
+        <i class="glyphicon glyphicon-tags"></i>
+        topics:
+        <span class="badge"
+          ng-repeat="t in lbdetails.lb.topics">{{ t }}</span>
+      </p>
+
+      <p class="text-muted">
+        <i class="glyphicon glyphicon-filter"></i>
+        domains:
+        <span class="badge"
+          ng-repeat="d in lbdetails.lb.domains">{{ d }}</span>
+      </p>
+
+    </div>
+    <div class="panel-body">
+
+      <ul class="nav nav-tabs" role="tablist">
+        <li ng-class="{active: 'lasthour' == activetab }">
+          <a href ng-click="activetab = 'lasthour'">Last Hour</a>
+        </li>
+        <li ng-class="{active: 'lastday' == activetab }">
+          <a href ng-click="activetab = 'lastday'">Last Day</a>
+        </li>
+      </ul>
+
+
+      <div class="tab-content">
+        <div class="tab-pane"
+          ng-repeat="tab in timewindows"
+          ng-class="{active: tab.name == activetab }">
+
+          <div class="alert alert-info" role="alert"
+            ng-hide="lbdetails.rankings[tab.timewindow].length">
+            <h1>(☞ﾟ∀ﾟ)☞</h1>
+            <p>Rad! You just created a linkboard!  This page will update as we count the tweets.</p>
+          </div>
+
+          <ul class="list-unstyled ranked-items">
+            <li class="ranked-item" ng-repeat="item in lbdetails.rankings[tab.timewindow]">
+
+              <div class="ranked-item-stats">
+                <span class="ranked-item-sharecount">{{ item.sharecount }}</span>
+                <a class="ranked-item-comments"
+                  href
+                  ng-click="showTw(lbdetails.lb.user_id, lbdetails.lb.leaderboard_id, item)">
+                  <i class="glyphicon glyphicon-comment"></i></a>
+              </div>
+
+              <div class="ranked-item-link">
+                <a target="_new" href="{{ item._id }}">{{ prettyUrl(item._id) }}</a>
+              </div>
+
+            </li>
+          </ul>
+
+        </div>
+      </div>
+
+    </div>
+    <div class="panel-footer">
+      <button ng-hide="publish_url" class="btn btn-success" ng-click="confirmShareLb()">
+        <span class="glyphicon glyphicon-send"></span> Share
+      </button>
+
+      <button ng-show="publish_url" class="btn btn-warning" ng-click="confirmUnShareLb()">
+        <span class="glyphicon glyphicon-ban-circle"></span> Stop Sharing
+      </button>
+
+      <button class="btn btn-danger" ng-click="confirmDeleteLb()">
+        <span class="glyphicon glyphicon-trash"></span> Delete
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- modals -->
+
+<div id="confirm-share-modal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title">Share Linkboard</h4>
+      </div>
+      <div class="modal-body">
+        <p>This thing is pretty cool, let's send it to somebody</p>
+      </div>
+      <div class="modal-footer">
+        <div ng-hide="sharingLb">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Uhh, Maybe later</button>
+          <button type="button" class="btn btn-success" ng-click="shareLb()">
+            <span class="glyphicon glyphicon-send"></span> Why are you always preparing? Publish!
+          </button>
+        </div>
+        <div ng-show="sharingLb">
+          <p class="text-muted"><kbd>(∩｀-´)⊃━☆ﾟ.*･｡ﾟ</kbd></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="confirm-unshare-modal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title">Stop Sharing Linkboard?</h4>
+      </div>
+      <div class="modal-body">
+        <p>Sharing is overrated, I just want to keep it all to myself.</p>
+
+        <p>share url: <strong>{{ publish_url }}</strong></p>
+      </div>
+      <div class="modal-footer">
+        <div ng-hide="unsharingLb">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Sorry, Wrong Button</button>
+          <button type="button" class="btn btn-warning" ng-click="unshareLb()">
+            <span class="glyphicon glyphicon-ban-circle"></span> Stop Sharing!!
+          </button>
+        </div>
+        <div ng-show="unsharingLb">
+          <p class="text-muted"><kbd>(╯︵╰,)</kbd></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="confirm-delete-modal" class="modal fade" tabindex="-1" role="dialog" >
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title">Delete Linkboard</h4>
+      </div>
+      <div class="modal-body">
+        <p>If you throw this away, you'll need to make one again.  Which is totally easy anyway.</p>
+      </div>
+      <div class="modal-footer">
+        <div ng-hide="deletingLb">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Whoops, Nevermind</button>
+          <button type="button" class="btn btn-danger" ng-click="deleteLb()">
+            <span class="glyphicon glyphicon-trash"></span> Trash it Already
+          </button>
+        </div>
+        <div ng-show="deletingLb">
+          <p class="text-muted"><kbd>(╯°□°）╯︵ ┻━┻</kbd></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

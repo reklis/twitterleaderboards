@@ -1,1 +1,72 @@
-<h1 ng-show="loading">Loading...</h1> <div ng-hide="loading"> <h3>{{ lbdetails.lb.name }}</h3> <h4 class="pull-right"> <span class="text-muted">created by</span> <a target="_new" href="http://twitter.com/{{ lbdetails.lb.user_name }}">{{ lbdetails.lb.user_name }} <img height="48" width="48" ng-show="lbdetails.lb.user_photos.length" ng-src="{{ lbdetails.lb.user_photos[0].value }}" alt=""></a> </h4> <p> <span class="badge" ng-repeat="t in lbdetails.lb.topics">{{ t }}</span>  </p> <ul class="list-inline"> <li class="text-muted" ng-repeat="d in lbdetails.lb.domains">{{ d }}</li> </ul> <div class="clearfix"></div> <ul class="nav nav-tabs" role="tablist"> <li ng-class="{active: 'lasthour' == activetab }"> <a href ng-click="activetab = 'lasthour'">Last Hour</a> </li> <li ng-class="{active: 'lastday' == activetab }"> <a href ng-click="activetab = 'lastday'">Last Day</a> </li> </ul> <div class="tab-content"> <div class="tab-pane" ng-repeat="tab in timewindows" ng-class="{active: tab.name == activetab }"> <div class="alert alert-info" role="alert" ng-hide="lbdetails.rankings[tab.timewindow].length"> <h1>{{ empty_animation_state }}</h1> <p>Nothing to see here, still counting tweets. If this message continues that means there aren't enough tweets that match this topic on these domains.</p> </div> <ul class="list-unstyled ranked-items"> <li class="ranked-item" ng-repeat="item in lbdetails.rankings[tab.timewindow]"> <div class="ranked-item-stats"> <span class="ranked-item-sharecount">{{ item.sharecount }}</span> <a class="ranked-item-comments" href ng-click="showTw(lbdetails.lb.user_id, lbdetails.lb.leaderboard_id, item)"> <i class="glyphicon glyphicon-comment"></i></a> </div> <div class="ranked-item-link"> <a target="_new" href="{{ item._id }}">{{ prettyUrl(item._id) }}</a> </div> </li> </ul> </div> </div> </div>
+<h1 ng-show="loading">Loading...</h1>
+
+<div ng-hide="loading">
+
+  <h3>{{ lbdetails.lb.name }}</h3>
+  <h4 class="pull-right">
+    <span class="text-muted">created by</span>
+
+    <a target="_new" href="http://twitter.com/{{ lbdetails.lb.user_name }}">{{ lbdetails.lb.user_name }}
+        <img
+          height="48" width="48"
+          ng-show="lbdetails.lb.user_photos.length"
+          ng-src="{{ lbdetails.lb.user_photos[0].value }}" alt=""></a>
+  </h4>
+
+  <p>
+    <span class="badge"
+      ng-repeat="t in lbdetails.lb.topics">{{ t }}</span>
+    </span>
+  </p>
+
+  <ul class="list-inline">
+    <li
+      class="text-muted"
+      ng-repeat="d in lbdetails.lb.domains">{{ d }}</li>
+  </ul>
+
+  <div class="clearfix"></div>
+
+  <ul class="nav nav-tabs" role="tablist">
+    <li ng-class="{active: 'lasthour' == activetab }">
+      <a href ng-click="activetab = 'lasthour'">Last Hour</a>
+    </li>
+    <li ng-class="{active: 'lastday' == activetab }">
+      <a href ng-click="activetab = 'lastday'">Last Day</a>
+    </li>
+  </ul>
+
+  <div class="tab-content">
+    <div class="tab-pane"
+      ng-repeat="tab in timewindows"
+      ng-class="{active: tab.name == activetab }">
+
+      <div class="alert alert-info" role="alert"
+        ng-hide="lbdetails.rankings[tab.timewindow].length">
+        <h1>{{ empty_animation_state }}</h1>
+        <p>Nothing to see here, still counting tweets.  If this message continues that means there aren't enough tweets that match this topic on these domains.</p>
+      </div>
+
+      <ul class="list-unstyled ranked-items">
+        <li class="ranked-item" ng-repeat="item in lbdetails.rankings[tab.timewindow]">
+
+          <div class="ranked-item-stats">
+            <span class="ranked-item-sharecount">{{ item.sharecount }}</span>
+            <a class="ranked-item-comments"
+              href
+              ng-click="showTw(lbdetails.lb.user_id, lbdetails.lb.leaderboard_id, item)">
+              <i class="glyphicon glyphicon-comment"></i></a>
+          </div>
+
+          <div class="ranked-item-link">
+            <a target="_new" href="{{ item._id }}">{{ prettyUrl(item._id) }}</a>
+          </div>
+
+        </li>
+      </ul>
+
+    </div>
+  </div>
+
+</div>
+
