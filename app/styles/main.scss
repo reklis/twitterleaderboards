@@ -10,19 +10,21 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/vendor/assets/font
 @import "bootstrap-sass-official/vendor/assets/stylesheets/bootstrap.scss";
 // endbower
 
-.site-name {
 
-  cursor: pointer; cursor: hand;
+// globals
+$tab-border-size: 5px;
+$tab-text-color: #ccc;
+$tab-border-color: whitesmoke;
+$tab-active-text-color: #428bca;
+$tab-active-border-color: #555;
+$tab-hover-text-color: #333;
+$tab-hover-border-color: orange;
 
-  .name-left {
-    color: gray;
-  }
-
-  .name-right {
-    color: gray;
-  }
-
-}
-
+@import "./header.scss";
+@import "./tabs.scss";
+@import "./buttons.scss";
+@import "./modals.scss";
+@import "./panels.scss";
+@import "./welcome.scss";
 @import "./about.scss";
 @import "./leaderboard.scss";
