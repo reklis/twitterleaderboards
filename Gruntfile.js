@@ -399,11 +399,16 @@ module.exports = function (grunt) {
       test: [
         'compass'
       ],
-      dist: [
-        'compass:dist',
-        'imagemin',
-        'svgmin'
-      ]
+      dist: {
+        tasks: [
+          'compass:dist',
+          'imagemin',
+          'svgmin'
+        ],
+        options: {
+          limit: 3
+        }
+      }
     },
 
     // Test settings
